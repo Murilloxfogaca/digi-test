@@ -13,7 +13,7 @@ npm -v
 
 ## Instalação
 
-Para instalar as dependências do projeto, execute:
+Para instalar as dependências do projeto, execute os comandos abaixo dentro da pasta Frontend:
 bash npm install ou, se estiver usando Yarn: bash yarn install
 
 ## Scripts Disponíveis
