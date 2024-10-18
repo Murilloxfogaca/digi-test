@@ -21,7 +21,7 @@ export default function Single() {
   return (
     <div className="px-4">
       <div className="my-5 flex items-center justify-between"></div>
-      <div className="flex align-start ">
+      <div className="flex align-start flex-col-reverse gap-5 md:flex-row ">
         <div className="mb-6 sm:w-1/2 rounded-lg bg-white px-6 py-8 flex-col flex justify-between">
           <div>
             <h1 className="font-semibold text-3xl text-grey-400">
@@ -43,7 +43,7 @@ export default function Single() {
               <p className="mt-1 text-grey-400">{singleProduct.info}</p>
             )}
           </div>
-          <div className="flex justify-between">
+          <div className="flex flex-col gap-5 md:flex-row justify-between">
             <h6 className="mb-0 font-semibold text-4xl">
               {formatMoedaBR(singleProduct.price)}
             </h6>
