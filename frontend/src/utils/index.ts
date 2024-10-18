@@ -57,3 +57,10 @@ export function encodeURL(url: string): string {
 export function decodeURL(encodedUrl: string): string {
   return decodeURIComponent(encodedUrl);
 }
+
+export function formatMoedaBR(valor: string): string {
+  return Number(valor).toLocaleString("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  });
+}

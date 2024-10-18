@@ -1,22 +1,60 @@
 "use client";
 import {
   clearCart,
+  formatMoedaBR,
   getCartFromCookies,
   iProduct,
   removeFromCart,
 } from "@/utils";
 import { useEffect, useState } from "react";
 
+interface iCart extends iProduct {
+  quantity: number;
+}
+
 export function CartBar() {
   const [show, setShow] = useState(false);
   const [cart, setCart] = useState<iProduct[]>([]);
+  const [totalCart, setTotalCart] = useState<number>(0);
+  const [cartExibition, setCartExibition] = useState<iCart[]>([]);
   const [isHydrated, setIsHydrated] = useState(false);
 
   useEffect(() => {
+    handlerUpdateHydrated();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const handlerUpdateHydrated = () => {
     const loadedCart = getCartFromCookies();
     setCart(loadedCart);
     setIsHydrated(true);
-  }, []);
+    setCartExibition(unitedCart(cart));
+    setTotalCart(handlerGetTotalCart(cart));
+  };
+
+  const handlerGetTotalCart = (data: iProduct[]): number => {
+    let addNewValue = 0;
+
+    data.forEach((produto) => {
+      addNewValue += Number(produto.price);
+    });
+
+    return addNewValue;
+  };
+
+  const unitedCart = (data: iProduct[]): iCart[] => {
+    const produtoContador = new Map<string, iCart>();
+    data.forEach((produto) => {
+      const key = JSON.stringify(produto);
+      if (produtoContador.has(key)) {
+        produtoContador.get(key)!.quantity! += 1;
+      } else {
+        produtoContador.set(key, { ...produto, quantity: 1 });
+      }
+    });
+
+    return Array.from(produtoContador.values());
+  };
 
   const handleRemoveItem = (productName: string) => {
     removeFromCart(productName);
@@ -29,7 +67,7 @@ export function CartBar() {
   };
 
   return (
-    <div className="p-5">
+    <div className="p-5" onClick={() => handlerUpdateHydrated()}>
       <div className="flex justify-center">
         <div className="relative ">
           <div className="flex flex-row cursor-pointer truncate p-2 px-4 rounded">
@@ -39,9 +77,6 @@ export function CartBar() {
                 onClick={() => setShow(!show)}
                 className="relative"
               >
-                <div className="absolute text-xs rounded-full -mt-1 -mr-2 px-1 font-bold top-0 right-0 bg-red-700 text-white">
-                  {isHydrated ? cart.length : 0}
-                </div>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="100%"
@@ -61,22 +96,25 @@ export function CartBar() {
               </button>
             </div>
           </div>
-          {cart.length > 0 && (
-            <div
-              className="absolute w-full  rounded-b border-t-0 z-10"
-              style={{ right: "190px" }}
-            >
-              {show && (
-                <div className="shadow-xl w-64">
-                  {cart.map((product, index) => (
+
+          <div
+            className="absolute w-full  rounded-b border-t-0 z-10"
+            style={{ right: "190px" }}
+          >
+            {show && (
+              <div className="shadow-xl w-64">
+                {isHydrated &&
+                  cartExibition.map((product, index) => (
                     <div
                       key={index}
-                      className="p-2 flex bg-white hover:bg-gray-100 cursor-pointer border-b border-gray-100"
+                      className="p-4 flex bg-white hover:bg-gray-100 cursor-pointer border-b border-gray-100"
                     >
                       <div className="flex-auto text-sm w-32">
                         <div className="font-bold">{product.name}</div>
-                        <div className="truncate">Product 1 description</div>
-                        <div className="text-gray-400">Qt: 2</div>
+                        <div className="truncate">{product.detail}</div>
+                        <div className="text-gray-400">
+                          Qt: {product.quantity}
+                        </div>
                       </div>
                       <div className="flex flex-col w-18 font-medium items-end">
                         <button
@@ -102,21 +140,25 @@ export function CartBar() {
                             <line x1="14" y1="11" x2="14" y2="17"></line>
                           </svg>
                         </button>
-                        $12.22
+                        {formatMoedaBR(product.price)}
                       </div>
                     </div>
                   ))}
 
-                  <div className="p-4">
-                    <button onClick={handleClearCart}>Limpar Carrinho</button>
-                    <button className="text-base  undefined  hover:scale-110 focus:outline-none flex justify-center px-4 py-2 rounded font-bold cursor-pointer">
-                      Checkout $36.66
-                    </button>
-                  </div>
+                <div className="p-4 bg-gray-100">
+                  <button
+                    onClick={handleClearCart}
+                    className="mx-auto block bg-transparent hover:bg-rose-500 text-rose-700 font-semibold hover:text-white py-2 px-4 border border-rose-500 hover:border-transparent rounded"
+                  >
+                    Limpar Carrinho
+                  </button>
+                  <button className="mx-auto block text-rose-700 text-base hover:scale-110 focus:outline-none flex justify-center px-4 py-2 rounded font-bold cursor-pointer">
+                    Total: {formatMoedaBR(String(totalCart))}
+                  </button>
                 </div>
-              )}
-            </div>
-          )}
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

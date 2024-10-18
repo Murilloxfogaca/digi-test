@@ -14,13 +14,15 @@ export function Card(props: iProduct) {
     <>
       <div className="flex items-center justify-between">
         <div className="flex items-center">
-          <Image
-            width="400"
-            height="400"
-            className="mr-2 h-20 w-20 rounded-full object-cover"
-            src={image}
-            alt={name}
-          />
+          <Link href={`/single/${encodeURL(name)}`}>
+            <Image
+              width="400"
+              height="400"
+              className="mr-2 h-20 w-20 rounded-full object-cover"
+              src={image}
+              alt={name}
+            />
+          </Link>
           <Link href={`/single/${encodeURL(name)}`}>
             <h2 className="text-base font-semibold text-rose-600 text-2xl">
               {name}
@@ -33,14 +35,16 @@ export function Card(props: iProduct) {
           </Link>
         </div>
       </div>
-      <p className="my-6 text-sm font-normal font-bold text-gray-2s00">
-        <u className="text-rose-600">Descrição</u>: {detail}
-        {info && (
-          <>
-            <br /> {info}
-          </>
-        )}
-      </p>
+      <Link href={`/single/${encodeURL(name)}`}>
+        <p className="my-6 text-sm font-normal font-bold text-gray-2s00">
+          <u className="text-rose-600">Descrição</u>: {detail}
+          {info && (
+            <>
+              <br /> {info}
+            </>
+          )}
+        </p>
+      </Link>
       <div className="mt-6 flex items-center justify-between text-sm font-semibold text-gray-900">
         <div className="flex items-center align-center">
           <div>
@@ -49,9 +53,11 @@ export function Card(props: iProduct) {
                 Código: {offer}
               </span>
             )}
-            <b className="text-rose-600 text-2xl">
-              R$ <span className="mr-1">{price}</span>
-            </b>
+            <Link href={`/single/${encodeURL(name)}`}>
+              <b className="text-rose-600 text-2xl">
+                R$ <span className="mr-1">{price}</span>
+              </b>
+            </Link>
           </div>
         </div>
         <div className="flex items-center">
