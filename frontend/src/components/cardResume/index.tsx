@@ -1,13 +1,14 @@
 "use client";
-import { iProduct, updateCartProduct } from "@/utils";
+import { addToCart, encodeURL, iProduct } from "@/utils";
 import Image from "next/image";
+import Link from "next/link";
 
 interface iProductWithId extends iProduct {
   key: number;
 }
 
 export function Card(props: iProduct) {
-  const { image, name, detail, hero, price, offer } = props;
+  const { image, name, detail, hero, price, offer, info } = props;
 
   return (
     <>
@@ -16,41 +17,50 @@ export function Card(props: iProduct) {
           <Image
             width="400"
             height="400"
-            className="mr-2 h-10 w-10 rounded-full object-cover"
+            className="mr-2 h-20 w-20 rounded-full object-cover"
             src={image}
             alt={name}
           />
-          <div>
-            <h3 className="text-base font-semibold text-gray-900">{name}</h3>
+          <Link href={`/single/${encodeURL(name)}`}>
+            <h2 className="text-base font-semibold text-rose-600 text-2xl">
+              {name}
+            </h2>
             {hero && (
               <span className="block text-xs font-normal text-gray-500">
                 {hero}
               </span>
             )}
-          </div>
+          </Link>
         </div>
       </div>
       <p className="my-6 text-sm font-normal font-bold text-gray-2s00">
-        {detail}
+        <u className="text-rose-600">Descrição</u>: {detail}
+        {info && (
+          <>
+            <br /> {info}
+          </>
+        )}
       </p>
       <div className="mt-6 flex items-center justify-between text-sm font-semibold text-gray-900">
         <div className="flex items-center align-center">
           <div>
             {offer && (
-              <span className="block text-xs font-normal text-gray-500">
-                Offer: {offer}
+              <span className="block text-xs font-normal text-rose-600">
+                Código: {offer}
               </span>
             )}
-            R$ <span className="mr-1">{price}</span>
+            <b className="text-rose-600 text-2xl">
+              R$ <span className="mr-1">{price}</span>
+            </b>
           </div>
         </div>
         <div className="flex items-center">
           <button
-            onClick={() => updateCartProduct(props)}
+            onClick={() => addToCart(props)}
             role="button"
-            className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+            className="bg-transparent hover:bg-rose-500 text-rose-700 font-semibold hover:text-white py-2 px-4 border border-rose-500 hover:border-transparent rounded"
           >
-            Ver mais
+            Adicionar ao carrinho
           </button>
         </div>
       </div>

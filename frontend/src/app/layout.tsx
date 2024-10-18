@@ -20,7 +20,7 @@ export default function RootLayout({
             <main className="">
               <div className="bg-white p-6">
                 <div className="flex items-center justify-between">
-                  <h2 className="text-4xl mb-0 font-semibold text-gray-900">
+                  <h2 className="text-4xl mb-0 uppercase font-bold text-rose-600">
                     Explorador Digi
                   </h2>
                   <div className="flex items-center justify-between">

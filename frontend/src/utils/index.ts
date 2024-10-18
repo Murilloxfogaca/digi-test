@@ -50,3 +50,10 @@ export function updateCartProduct(product: iProduct) {
 export function clearCart() {
   saveCartToCookies([]);
 }
+
+export function encodeURL(url: string): string {
+  return encodeURIComponent(url);
+}
+export function decodeURL(encodedUrl: string): string {
+  return decodeURIComponent(encodedUrl);
+}
