@@ -1,57 +1,35 @@
-# Descrição do Teste Técnico para Desenvolvedor
+# Frontend
 
-## Objetivo
-Desenvolver uma aplicação simples que:
-1. Consuma dados do arquivo JSON products.json.
-2. Exiba informações sobre produtos.
-3. Permita adicionar e remover produtos no carrinho de compras.
-4. Visualizar o carrinho após terminar de incluir os itens no mesmo.
+Este é o frontend de um projeto utilizando o framework [Next.js](https://nextjs.org/), junto com React e TypeScript. O projeto também está configurado para utilizar [Tailwind CSS](https://tailwindcss.com/) para o design e estilização.
 
-## Tecnologias
-- Utilize qualquer tecnologia de sua escolha (React, Angular, Vue, Node.js, Python, Flutter, etc.).
-- A aplicação deve ser responsiva e funcionar em diferentes dispositivos.
+## Pré-requisitos
 
-## Requisitos
-- O projeto deve conter um arquivo `README.md` com instruções claras sobre como executar o projeto.
-- Utilize Git para controle de versão, seguindo a estratégia de Gitflow.
-- A interface deve ser intuitiva e de fácil navegação.
-- É mandatório o uso do arquivo JSON disponibilizado neste repositório.
+Certifique-se de ter o Node.js instalado em sua máquina. Você pode verificar se o Node está instalado com os seguintes comandos:
 
-## Avaliação
-- Qualidade do código.
-- Cumprimento dos requisitos.
-- Usabilidade da interface.
-- Documentação no `README.md`.
+```bash
+node -v
+npm -v
+```
 
-## Instruções para Desenvolvimento
+## Instalação
 
-1. Crie o Repositório
-   - Crie um repositório no seu perfil do Github;
-     
-2. Desenvolvimento
-   - Crie uma nova branch para seu desenvolvimento, seguindo o Gitflow:
-     ```
-     git checkout -b feature/<nome-da-feature>
-     ```
-   - Desenvolva a solução conforme os objetivos e requisitos descritos.
-   - Leve em consideração que é uma aplicação real e que poderia ter novos requisitos e funcionalidades.
-   - Faça commits regulares com mensagens claras.
+Para instalar as dependências do projeto, execute:
+bash npm install ou, se estiver usando Yarn: bash yarn install
 
-3. Testes e Validação
-   - Realize testes para garantir que a aplicação funciona conforme o esperado.
-   - Certifique-se de que todos os requisitos foram atendidos.
+## Scripts Disponíveis
 
-4. Documentação
-   - Atualize o arquivo `README.md` com instruções detalhadas sobre como executar a aplicação.
+- npm run dev: Executa o ambiente de desenvolvimento.
+- npm run build: Faz o build do projeto para produção.
+- npm run start: Inicia o servidor em modo de produção após o build.
 
-5. Disponibilizar para Avaliação
-   - Após concluir o desenvolvimento e a documentação, faça o push das alterações para seu repositório:
-     ```
-     git push origin feature/<nome-da-feature>
-     ```
-   - Crie um Pull Request da sua branch para a branch principal (`main` ou `master`) do repositório original.
+## Tecnologias Utilizadas Next.js:
 
-## Prazo
-- O prazo para a conclusão do teste é de 2 dias após o recebimento das instruções.
+- Framework React para construção de aplicações web. React: Biblioteca
+- JavaScript para construção de interfaces de usuário. TypeScript:
+- Suporte a tipagem estática. Tailwind CSS: Framework CSS utilitário para estilização rápida e eficiente.
+- ESLint: Ferramenta para garantir a qualidade e consistência do código.
+- PostCSS: Usado em conjunto com o Tailwind para processamento de CSS.
 
-Lembre-se de manter um bom nível de organização e limpeza do código, além de seguir as boas práticas de desenvolvimento e documentação. Boa sorte!
+_Testando o Projeto Você pode testar o projeto localmente após a instalação das dependências com o comando: bash npm run dev O projeto estará rodando no endereço: http://localhost:3000._
+
+_Licença Este projeto é licenciado sob a licença MIT._
